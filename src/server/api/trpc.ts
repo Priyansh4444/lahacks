@@ -6,7 +6,8 @@
  * TL;DR - This is where all the tRPC server stuff is created and plugged in. The pieces you will
  * need to use are documented accordingly near the end.
  */
-import { initTRPC } from "@trpc/server";
+import { currentUser } from "@clerk/nextjs/server";
+import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
@@ -80,4 +81,23 @@ export const createTRPCRouter = t.router;
  * guarantee that a user querying is authorized, but you can still access user session data if they
  * are logged in.
  */
+
+const middleware = t.middleware;
+const isAuth = middleware(async (opts) => {
+  const user = await currentUser();
+
+  if (!user) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+
+  return opts.next({
+    ctx: {
+      userId: user.id,
+      userEmail: user.primaryEmailAddressId,
+      user,
+    },
+  });
+});
+export const privateProcedure = t.procedure.use(isAuth);
+
 export const publicProcedure = t.procedure;

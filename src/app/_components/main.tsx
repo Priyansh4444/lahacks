@@ -11,7 +11,7 @@ function Main() {
       <Vortex
         backgroundColor="black"
         rangeY={800}
-        particleCount={500}
+        particleCount={100}
         baseHue={120}
         className="mb-[150px] mt-[200px] flex w-full flex-col items-center justify-center  px-2 py-4 md:px-10"
       >

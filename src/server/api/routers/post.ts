@@ -1,31 +1,41 @@
 import { z } from "zod";
 
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { posts } from "~/server/db/schema";
+import {
+  createTRPCRouter,
+  publicProcedure,
+  privateProcedure,
+} from "~/server/api/trpc";
+import { db } from "~/server/db";
+import { users } from "~/server/db/schema";
 
-export const postRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
+// "users", // Table name
+//   {
+//     id: serial("id").primaryKey(),
+//     email: varchar("email", { length: 256 }).unique().notNull(), // Assuming email should be unique & not null
+//     name: varchar("name", { length: 256 }).notNull(),
+//     apiKey: varchar("api_key", { length: 256 }).notNull(), // API key column
+//     createdAt: timestamp("created_at")
+//       .default(sql`CURRENT_TIMESTAMP`)
+//       .notNull(),
+//     updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`),
+//   },
+//   (user) => ({
+//     emailIndex: index("email_idx").on(user.email), // Optional: Create an index on the email column
+//   }),
+// );
+export const userRouter = createTRPCRouter({
+  addUser: privateProcedure
+    .input(z.object({ name: z.string(), apiKey: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      const userer = {
+        name: input.name,
+        apiKey: input.apiKey,
+        email: ctx.userEmail!,
+      };
+      const user = await db.insert(users).values(userer).returning().execute();
+
       return {
-        greeting: `Hello ${input.text}`,
+        user,
       };
     }),
-
-  create: publicProcedure
-    .input(z.object({ name: z.string().min(1) }))
-    .mutation(async ({ ctx, input }) => {
-      // simulate a slow db call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      await ctx.db.insert(posts).values({
-        name: input.name,
-      });
-    }),
-
-  getLatest: publicProcedure.query(({ ctx }) => {
-    return ctx.db.query.posts.findFirst({
-      orderBy: (posts, { desc }) => [desc(posts.createdAt)],
-    });
-  }),
 });
