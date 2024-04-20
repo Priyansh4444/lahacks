@@ -8,7 +8,7 @@ import { CanvasRevealEffect } from "~/components/canvas-reveal-effect";
 export function CanvasCards() {
   return (
     <>
-      <div className="py-20 flex flex-col lg:flex-row items-center justify-center bg-white dark:bg-black w-full gap-4 mx-auto px-8">
+      <div className="py-20 flex flex-col lg:flex-row items-center justify-center w-full gap-4 mx-auto px-8">
         <Card title="Save time" icon={<AceternityIcon />}>
           <CanvasRevealEffect
             animationSpeed={5.1}
@@ -18,7 +18,7 @@ export function CanvasCards() {
         <Card title="Learn Quicker" icon={<AceternityIcon />}>
           <CanvasRevealEffect
             animationSpeed={3}
-            containerClassName="bg-black"
+            containerClassName="bg-red-500"
             colors={[
               [236, 72, 153],
               [232, 121, 249],

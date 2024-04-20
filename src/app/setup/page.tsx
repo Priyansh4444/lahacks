@@ -1,39 +1,49 @@
 "use client";
 import React, { useState } from "react";
-import { string } from "zod";
 import { Button } from "~/components/ui/button";
-import { userRouter } from "~/server/api/routers/post";
 import { api } from "~/trpc/react";
-// Import your generated tRPC hook for the mutation
+
+// Assuming "~/trpc/react" is the correct path for your tRPC hooks
+// And assuming there's an "addUser" mutation in your tRPC setup
 
 function Page() {
-  const [apiKey, setApiKey] = useState<string>("");
-  const [name, setName] = useState<string>("");
-  const mutation = api.addUser.addUser.useMutation();
-  const submitForm = async ({
-    apiKey,
-    name,
-  }: {
-    apiKey: string;
-    name: string;
-  }) => {
-   mutation.mutate({name, apiKey});
+  const [apiKey, setApiKey] = useState(""); // No need to explicitly type here; TypeScript infers it's a string.
+  const [name, setName] = useState("");
+  const [error, setError] = useState(""); // State to handle any error messages
+  const addUserMutation = api.addUser.addUser.useMutation(); // Adjusted based on your API structure. Ensure correct path.
 
-  const handleSubmit = async (e: Event) => {
-    e.preventDefault();
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    await submitForm({ apiKey, name });
+  const submitForm = async (apiKey: string, name: string) => {
+    try {
+      await addUserMutation.mutateAsync({ name, apiKey });
+      // Optionally reset state or redirect after success
+      // setApiKey("");
+      // setName("");
+    } catch (error) {
+      // Assuming the error is an instance of Error
+      setError(
+        error instanceof Error ? error.message : "An unexpected error occurred",
+      );
+    }
   };
-};
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent the default form submit action
+    submitForm(apiKey, name)
+      .then(() => {
+        // Handle any post-submit actions here
+      })
+      .catch((error) => {
+        // Handle any errors here
+      });
+  };
 
   return (
     <div className="flex h-full flex-col items-center justify-center">
       <h1 className="mb-7 mt-5 text-center text-3xl font-bold">Setup Page</h1>
       <p className="mb-6 max-w-md text-center">
-        pwease enter your api key and name pls :3
+        Please enter your API key and name.
       </p>
-      <form className="flex flex-col gap-4">
-        {/* onSubmit={handleSubmit} */}
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <input
           type="text"
           id="api-key"
@@ -58,6 +68,7 @@ function Page() {
         >
           Submit Now
         </Button>
+        {error && <p className="text-red-500">{error}</p>}
       </form>
     </div>
   );
