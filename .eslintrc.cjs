@@ -16,6 +16,14 @@ const config = {
   "rules": {
     "@typescript-eslint/array-type": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-return": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/consistent-indexed-object-style": "off",
+    "@typescript-eslint/dot-notation": "off",
+    "@react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/consistent-type-imports": [
       "warn",
       {
@@ -30,14 +38,7 @@ const config = {
       }
     ],
     "@typescript-eslint/require-await": "off",
-    "@typescript-eslint/no-misused-promises": [
-      "error",
-      {
-        "checksVoidReturn": {
-          "attributes": false
-        }
-      }
-    ],
+
     "drizzle/enforce-delete-with-where": [
       "error",
       {

@@ -12,7 +12,6 @@
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "checkJs": true,
-    "typeRoots": ["./", "./node_modules/@types"],
 
 
     /* Bundled projects */
