@@ -1,83 +1,122 @@
-import * as React from 'react';
-import { BarChart } from '@mui/x-charts/BarChart';
-import { axisClasses } from '@mui/x-charts';
+"use client";
+import React, { PureComponent } from "react";
+import {
+  BarChart,
+  Bar,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
-const chartSetting = {
-  yAxis: [
-    {
-      label: 'Time saved (minutes)',
-    },
-  ],
-  width: 500,
-  height: 300,
-  sx: {
-    [`.${axisClasses.left} .${axisClasses.label}`]: {
-      transform: 'translate(-20px, 0)',
-    },
-  },
-};
-const dataset = [
+const data = [
   {
-    time: 30,
-    month: 'Jan',
+    name: "Jan",
+    time: 44,
   },
   {
-    time: 40,
-    month: 'Fev',
+    name: "Feb",
+    time: 23,
   },
   {
-    time: 60,
-    month: 'Mar',
+    name: "Mar",
+    time: 56,
   },
   {
-    time: 80,
-    month: 'Apr',
+    name: "Apr",
+    time: 34,
   },
   {
-    time: 90,
-    month: 'May',
+    name: "May",
+    time: 67,
   },
   {
-    time: 100,
-    month: 'June',
+    name: "Jun",
+    time: 45,
   },
   {
-    time: 120,
-    month: 'July',
+    name: "Jul",
+    time: 23,
   },
   {
-    time: 130,
-    month: 'Aug',
+    name: "Aug",
+    time: 45,
   },
   {
-    time: 140,
-    month: 'Sept',
+    name: "Sep",
+    time: 67,
   },
   {
-    time: 123,
-    month: 'Oct',
+    name: "Oct",
+    time: 56,
   },
   {
-    time: 110,
-    month: 'Nov',
+    name: "Nov",
+    time: 34,
   },
   {
-    time: 100,
-    month: 'Dec',
+    name: "Dec",
+    time: 23,
   },
 ];
 
-const valueFormatter = (value: number | null) => `${value}mm`;
-
-export default function BarsDataset() {
+export default function Example() {
   return (
-    <BarChart
-      dataset={dataset}
-      xAxis={[{ scaleType: 'band', dataKey: 'month' }]}
-      series={[
-        { dataKey: 'time', label: 'time', valueFormatter },
-      ]}
-      {...chartSetting}
-    />
+    <ResponsiveContainer width="100%" height="100%">
+      <BarChart
+        width={500}
+        height={300}
+        data={data}
+        margin={{
+          top: 20,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+        style={
+          {
+            fill: "hsl(var(--foreground))",
+            opacity: 0.9,
+          } as React.CSSProperties
+        }
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis
+          dataKey="name"
+          style={
+            {
+              fill: "hsl(var(--foreground))",
+              opacity: 0.9,
+            } as React.CSSProperties
+          }
+        />
+        <YAxis
+          style={
+            {
+              fill: "hsl(var(--foreground))",
+              opacity: 0.9,
+            } as React.CSSProperties
+          }
+        />
+        <Tooltip />
+        <Legend />
+        <Bar
+          dataKey="time"
+          stackId="a"
+          fill="#8884d8"
+          style={
+            {
+              fill: "hsl(var(--foreground))",
+              opacity: 0.9,
+              borderRadius: "30px",
+            } as React.CSSProperties
+          }
+        />
+      </BarChart>
+    </ResponsiveContainer>
   );
 }
+//     >
