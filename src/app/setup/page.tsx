@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Button } from "~/components/ui/button";
+import Background from "~/components/wavy-background";
 import { api } from "~/trpc/react";
 
 // Assuming "~/trpc/react" is the correct path for your tRPC hooks
@@ -38,39 +39,41 @@ function Page() {
   };
 
   return (
-    <div className="flex h-full flex-col items-center justify-center">
-      <h1 className="mb-7 mt-5 text-center text-3xl font-bold">Setup Page</h1>
-      <p className="mb-6 max-w-md text-center">
-        Please enter your API key and name.
-      </p>
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          id="api-key"
-          name="api-key"
-          placeholder="API_KEY"
-          className="w-[300px] rounded-lg border border-slate-200 bg-transparent px-5 py-3 outline-none"
-          value={apiKey}
-          onChange={(e) => setApiKey(e.target.value)}
-        />
-        <input
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Name"
-          className="w-[300px] rounded-lg border border-slate-200 bg-transparent px-5 py-3 outline-none"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <Button
-          type="submit"
-          className="shadow-[0px_2px_0px_0px_#FFFFFF40_inset] transition duration-200 hover:bg-blue-700"
-        >
-          Submit Now
-        </Button>
-        {error && <p className="text-red-500">{error}</p>}
-      </form>
-    </div>
+    <Background>
+      <div className="flex h-full flex-col items-center justify-center">
+        <h1 className="mb-7 mt-5 text-center text-3xl font-bold">Setup Page</h1>
+        <p className="mb-6 max-w-md text-center">
+          Please enter your API key and name.
+        </p>
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            id="api-key"
+            name="api-key"
+            placeholder="API_KEY"
+            className="w-[300px] rounded-lg border border-slate-200 bg-transparent px-5 py-3 outline-none"
+            value={apiKey}
+            onChange={(e) => setApiKey(e.target.value)}
+          />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Name"
+            className="w-[300px] rounded-lg border border-slate-200 bg-transparent px-5 py-3 outline-none"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Button
+            type="submit"
+            className="shadow-[0px_2px_0px_0px_#FFFFFF40_inset] transition duration-200 hover:bg-blue-700"
+          >
+            Submit Now
+          </Button>
+          {error && <p className="text-red-500">{error}</p>}
+        </form>
+      </div>
+    </Background>
   );
 }
 
