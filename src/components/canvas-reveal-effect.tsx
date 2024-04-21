@@ -24,7 +24,7 @@ export const CanvasRevealEffect = ({
   showGradient?: boolean;
 }) => {
   return (
-    <div className={cn("h-full relative bg-white w-full", containerClassName)}>
+    <div className={cn("relative h-full w-full bg-white", containerClassName)}>
       <div className="h-full w-full">
         <DotMatrix
           colors={colors ?? [[0, 255, 255]]}
@@ -58,7 +58,7 @@ interface DotMatrixProps {
 }
 
 const DotMatrix: React.FC<DotMatrixProps> = ({
-  colors = [[0, 0, 0]],
+  colors = [[30, 40, 50]],
   opacities = [0.04, 0.04, 0.04, 0.04, 0.04, 0.08, 0.08, 0.08, 0.08, 0.14],
   totalSize = 4,
   dotSize = 2,
@@ -230,7 +230,7 @@ const ShaderMaterial = ({
         case "uniform3fv":
           preparedUniforms[uniformName] = {
             value: uniform.value.map((v: number[]) =>
-              new THREE.Vector3().fromArray(v)
+              new THREE.Vector3().fromArray(v),
             ),
             type: "3fv",
           };

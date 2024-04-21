@@ -12,15 +12,14 @@ export function CanvasCards() {
         <Card title="Save time" icon={<AceternityIcon />}>
           <CanvasRevealEffect
             animationSpeed={5.1}
-            containerClassName="bg-emerald-900"
+            containerClassName="bg-emerald-900 "
           />
         </Card>
         <Card title="Learn Quicker" icon={<AceternityIcon />}>
           <CanvasRevealEffect
             animationSpeed={3}
-            containerClassName="bg-red-500"
+            containerClassName="bg-pink-60"
             colors={[
-              [236, 72, 153],
               [232, 121, 249],
             ]}
             dotSize={2}
@@ -66,7 +65,7 @@ const Card = ({
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="h-full w-full absolute inset-0"
+            className="h-full cursor-pointer w-full absolute inset-0"
           >
             {children}
           </motion.div>

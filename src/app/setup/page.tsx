@@ -66,7 +66,7 @@ function Page() {
           />
           <Button
             type="submit"
-            className="shadow-[0px_2px_0px_0px_#FFFFFF40_inset] transition duration-200 hover:bg-blue-700"
+            className="cursor-pointer shadow-[0px_2px_0px_0px_#FFFFFF40_inset] transition duration-200 hover:bg-blue-700"
           >
             Submit Now
           </Button>
