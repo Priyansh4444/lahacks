@@ -40,6 +40,7 @@ function Page() {
 
   return (
     <Background>
+
       <div className="flex h-full flex-col items-center justify-center">
         <h1 className="mb-7 mt-5 text-center text-3xl font-bold">Setup Page</h1>
         <p className="mb-6 max-w-md text-center">
