@@ -12,24 +12,28 @@ function page() {
       time: "1 year",
       desription: "CS Major UCI",
       link: "/pronsh.jpeg",
+      github: "https://github.com/Priyansh4444"
     },
     {
       title: "Leah",
-      time: "2 year",
+      time: "2nd year",
       desription: "CS Major UCI",
       link: "/Leah.jpeg",
+      github: "https://github.com/leahs4"
     },
     {
       title: "Benjamin Cates",
-      time: " 3year",
+      time: " 3rd year",
       desription: "CS Major UCI",
       link: "/benjamin.jpeg",
+      github: "https://github.com/benjamin-cates"
     },
     {
       title: "Tam",
-      time: "1 year",
-      desription: "CS Major not UCI",
+      time: "2nd year",
+      desription: "CS Major not Florida",
       link: "/Tam.png",
+      github: "https://github.com/ball2004244"
     },
   ];
   return (
