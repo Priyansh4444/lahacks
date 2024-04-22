@@ -50,7 +50,7 @@ function page() {
         <span>
           <span className="bg-gradient-to-r from-cyan-500 to-purple-500 bg-clip-text text-transparent">
             {" "}
-            Hobbies{" "}
+            About us{" "}
           </span>
         </span>
       </motion.div>
